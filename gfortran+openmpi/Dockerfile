@@ -318,6 +318,16 @@ RUN \
     ln -sf /usr/lib/linux-tools/${BASE_IMAGE_KERNEL_VERSION}/perf /usr/bin/perf && \
     rm -rf /var/lib/apt/lists/*
 
+# install OpenBLAS to provide BLAS and LAPACK implementations.  we install the
+# development package so we have convenience symbolic links for libblas.so and
+# liblapack.so.
+RUN \
+    apt update && \
+    apt install -y --no-install-recommends \
+                libopenblas-dev \
+               && \
+    rm -rf /var/lib/apt/lists/*
+
 # run from the user's home directory.  this doesn't really matter for run-times
 # that are isolated, but is a creature comfort for those that do
 # (e.g. Singularity).
