@@ -1,7 +1,7 @@
-# build against Ubuntu 21.04 LTS so we have a recent, stable foundation.
-FROM ubuntu:hirsute
+# build against Ubuntu 22.04 LTS so we have a recent, stable foundation.
+FROM ubuntu:jammy
 
-# this Dockerfile builds an image on top of an Ubuntu 21.04 base.
+# this Dockerfile builds an image on top of an Ubuntu 22.04 base.
 #
 # dependencies built from source using v10.3 of the GNU compilers:
 #
@@ -17,12 +17,12 @@ FROM ubuntu:hirsute
 #
 #     Name               Version
 #     ----               -------
-#     gcc/gfortran       10.3
-#     GDB                10.1
+#     gcc/gfortran       11.2.0
+#     GDB                12.0.90
 #     make               4.3
-#     OpenSSH (client)   8.4
+#     OpenSSH (client)   8.9
 #     perf               N/A (tied to the host)
-#     Valgrind           3.17
+#     Valgrind           3.18.1
 #     zlib               1.2.11
 
 # points of interest:
