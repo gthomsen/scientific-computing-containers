@@ -1,14 +1,10 @@
 # build against Intel's latest working base image.
-#
-# NOTE: as of April 2022, the latest version available (2022.0.2) has a bug in
-#       Intel MPI 2021.5.1 which prevents running MPI applications.
-#
-FROM intel/oneapi-hpckit:2021.4-devel-ubuntu18.04
+FROM docker.io/intel/oneapi-hpckit:2022.2-devel-ubuntu20.04
 
-# this Dockerfile builds an image on top of an 2021.4 Intel oneAPI HPCkit
-# image (which is derived from Ubuntu 18.04).
+# this Dockerfile builds an image on top of an 2022.2 Intel oneAPI HPCkit
+# image (which is derived from Ubuntu 20.04).
 #
-# dependencies built from source using v10.3 of the GNU compilers:
+# dependencies built from source using v2022.1.0 of the Intel compilers:
 #
 #     Name               Version      Notes
 #     ----               -------      -----
@@ -22,30 +18,18 @@ FROM intel/oneapi-hpckit:2021.4-devel-ubuntu18.04
 #
 #     Name               Version
 #     ----               -------
-#     gcc                7.5.0
-#     GDB                8.1.1
-#     OpenSSH (client)   8.4
+#     gcc                9.4.0
+#     GDB                9.2
+#     OpenSSH (client)   8.2
 #     perf               N/A (tied to the host)
-#     Valgrind           3.13
+#     Valgrind           3.15
 #     zlib               1.2.11
 
 # points of interest:
 #
-#    - we use Intel's oneAPI HPCKit base image to start from due to a host of
-#      issues preventing us from starting with a base Ubuntu image and adding
-#      the required components.  see documentation/oneAPI-development-context.md
-#      for additional details, though the highlights include:
-#
-#        * HPCKit 2022.0.2 can build dependencies, but not launch MPI jobs
-#          with Intel MPI 2021.5.1
-#        * HPCKit 2021.4.0 can build dependencies and launch MPI jobs
-#        * Neither the offline installer nor installing packages from Intel's
-#          repos replicate the (hidden) required environment to produce tools
-#          that can build our dependencies via this Dockerfile (although
-#          interactively each of those work fine).
-#
-#      NOTE: this results in a *huge* image on the order of 20 GiB.  flattening
-#            layers after the build is recommended, where possible.
+#    - we use Intel's oneAPI HPCKit base image to start from.  it is unclear
+#      whether we could start from a base Ubuntu image and add a minimal set of
+#      oneAPI dependencies.
 #
 #    - we do not install pkg-config since the base dependencies (OpenMPI, HDF5,
 #      netCDF) do not use it.  as a result, we specify LDFLAGS and CFLAGS to
@@ -73,10 +57,10 @@ FROM intel/oneapi-hpckit:2021.4-devel-ubuntu18.04
 #      can be found.
 
 # location oneAPI components.
-ENV I_COMPILER_ROOT=/opt/intel/oneapi/compiler/2021.4.0
-ENV I_IPP_ROOT=/opt/intel/oneapi/ipp/2021.4.0
-ENV I_MKL_ROOT=/opt/intel/oneapi/mkl/2021.4.0
-ENV I_MPI_ROOT=/opt/intel/oneapi/mpi/2021.4.0
+ENV I_COMPILER_ROOT=/opt/intel/oneapi/compiler/2022.1.0
+ENV I_IPP_ROOT=/opt/intel/oneapi/ipp/2021.6.0
+ENV I_MKL_ROOT=/opt/intel/oneapi/mkl/2022.1.0
+ENV I_MPI_ROOT=/opt/intel/oneapi/mpi/2021.6.0
 
 # installation tree.
 ARG INSTALL_ROOT=/opt
