@@ -60,6 +60,21 @@ containers being built as `root`:
 $ podman run --rm -it -v /path/on/host:/home/user image:tag
 ```
 
+# Using Podman Images for Profiling and Debugging
+
+Attaching a debugger to a process requires privileges that aren't normally
+granted to containers by default.  Add `--cap-add=SYS_PTRACE,SYS_ADMIN` to
+the container launch command to let `gdb`, `strace`, and friends work as
+expected:
+
+```shell
+$ podman run -p 5902:5902 \
+             --cap-add=SYS_PTRACE,SYS_ADMIN \
+             --rm -it \
+             -v ${HOME}/code:/code \
+             gfortran-openmpi:2022.08
+```
+
 # Creating Singularity Images
 
 Since advanced features of Singularity images are not needed, we build them from
