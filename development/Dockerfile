@@ -54,10 +54,14 @@ WORKDIR ${BUILD_ROOT}
 #
 # at a high-level here are the motivations for each of the packages:
 #
+#   emacs-nox:               Terminal-based Emacs for editing files.  Also
+#                            provides etags.
 #   mwm:                     Motif Window Manager.  Simple windowing system
 #                            to host graphical applications.
 #   strace:                  trace system calls made by an application.
 #   tightvncserver:          VNC server.
+#   vim:                     Terminal-based Vim for editing files.  Also
+#                            provides ctags.
 #   xfonts-*:                X11 fonts for 75 and 100 DPI.  required for the VNC
 #                            server to run since they're not installed by
 #                            default with "--no-install-recommends".
@@ -66,9 +70,11 @@ WORKDIR ${BUILD_ROOT}
 RUN \
     apt update && \
     apt-get install -y --no-install-recommends \
+                       emacs-nox \
                        mwm \
                        strace \
                        tightvncserver \
+                       vim \
                        xterm \
                        xfonts-base xfonts-75dpi xfonts-100dpi \
                        && \
