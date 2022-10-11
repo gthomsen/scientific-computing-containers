@@ -20,6 +20,7 @@ FROM ubuntu:jammy
 #     gcc/gfortran       11.2.0
 #     GDB                12.0.90
 #     make               4.3
+#     OpenBLAS           0.3.20
 #     OpenSSH (client)   8.9
 #     perf               N/A (tied to the host)
 #     Valgrind           3.18.1
