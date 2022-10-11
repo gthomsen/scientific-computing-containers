@@ -126,14 +126,14 @@ This results in branch names like `gfortran-openmpi-2022.04` being tagged with
 `gfortran+openmpi-2022.04`.
 
 # Templates
-Below are templates for creating the [[build|#Build Script]] and [[publication
-scripts|#Publication Scripts]], as well as the documentation summarizing the
+Below are templates for creating the [build](#Build Script) and [publication
+scripts](#Publication Scripts), as well as the documentation summarizing the
 process.
 
 ## Build Script Template
 The build script should do everything needed to build the target container
-image.  It should also be compatible with the associated [[publication
-script|#Publication Script]].
+image.  It should also be compatible with the associated [publication
+script](#Publication Script).
 
 The following `release/build.sh` builds the base image in a parallel manner:
 
@@ -153,7 +153,7 @@ podman build \
 ## Publication Script Template
 The publication script should do everything needed to publish the target
 container image to an upstream registry.  It should also be compatible with the
-associated [[build script|#Build Script]].
+associated [build script](#Build Script).
 
 The following `release/publish.sh` publishes the base image to DockerHub:
 ```shell
@@ -193,7 +193,7 @@ Provenance information should be included alongside the scripts used to build
 and publish the image.  The following details should be included:
 
 - Description of the image
-- Base image(s) used (e.g. ubuntu:jammy-20220801)
+- Base image(s) used (e.g. `ubuntu:jammy-20220801`)
 - Known deficiencies (e.g. lack of provenance - where and why)
 
 For consistency, use the following sections in the `release/provenance.md` file:
