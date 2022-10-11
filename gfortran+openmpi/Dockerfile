@@ -1,9 +1,9 @@
-# build against Ubuntu 22.04 LTS so we have a recent, stable foundation.
-FROM ubuntu:jammy
+# build against Ubuntu 18.04 LTS so we have a stable, legacy foundation.
+FROM ubuntu:bionic
 
-# this Dockerfile builds an image on top of an Ubuntu 22.04 base.
+# this Dockerfile builds an image on top of an Ubuntu 18.04 base.
 #
-# dependencies built from source using v10.3 of the GNU compilers:
+# dependencies built from source using v7.5 of the GNU compilers:
 #
 #     Name               Version      Notes
 #     ----               -------      -----
@@ -17,12 +17,12 @@ FROM ubuntu:jammy
 #
 #     Name               Version
 #     ----               -------
-#     gcc/gfortran       11.2.0
-#     GDB                12.0.90
-#     make               4.3
-#     OpenSSH (client)   8.9
+#     gcc/gfortran       7.5.0
+#     GDB                8.1
+#     make               4.1
+#     OpenSSH (client)   7.6
 #     perf               N/A (tied to the host)
-#     Valgrind           3.18.1
+#     Valgrind           3.13
 #     zlib               1.2.11
 
 # points of interest:
