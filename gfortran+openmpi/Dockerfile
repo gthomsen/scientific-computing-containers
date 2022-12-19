@@ -156,6 +156,26 @@ RUN \
 ENV OMPI_ALLOW_RUN_AS_ROOT=1
 ENV OMPI_ALLOW_RUN_AS_ROOT_CONFIRM=1
 
+# disable use of the contiguous memory allocator (CMA) for OpenMPI 4.x so that
+# we avoid spurious warnings about short reads when passing messages between
+# processes when we are in a container that does not have the SYS_PTRACE
+# capability.  this forces OpenMPI to fallback to a different BTL strategy that
+# does not require elevated privileges.
+#
+# see OpenMPI issue #4948 (https://github.com/open-mpi/ompi/issues/4948) for
+# details.  as of August 2022 this workaround has been made obsolete for the
+# upcoming OpenMPI 5.x series and can be safety removed once this image
+# migrates to the newer version.
+#
+# NOTE: disabling CMA does reduce overall performance, though ease of use is the
+#       primary goal of this container image.  running with SYS_PTRACE and
+#       unsetting the variable may result in improved performance.
+#
+# NOTE: this could also be set in ${INSTALL_ROOT}/etc/openmpi-mca-params.conf
+#       if we were inclined to avoid environment variables.
+#
+ENV OMPI_MCA_btl_vader_single_copy_mechanism=none
+
 # HDF5 1.10.8
 RUN \
     # download and unpack.
