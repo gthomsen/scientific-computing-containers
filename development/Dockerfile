@@ -98,6 +98,6 @@ RUN \
     apt update && \
     apt-get install -y --no-install-recommends \
                        python3-numpy \
-                       python3-pip
+                       python3-pip \
                        && \
     rm -rf /var/lib/apt/lists/*
