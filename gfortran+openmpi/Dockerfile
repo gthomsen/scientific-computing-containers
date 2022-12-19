@@ -151,6 +151,11 @@ RUN \
     cd ${BUILD_ROOT} && \
     rm -rf openmpi-4.1.2*
 
+# suppress OpenMPI's warning about running with privileges.  both of these are
+# required since we do not build with a separate, non-privileged user.
+ENV OMPI_ALLOW_RUN_AS_ROOT=1
+ENV OMPI_ALLOW_RUN_AS_ROOT_CONFIRM=1
+
 # HDF5 1.10.8
 RUN \
     # download and unpack.
