@@ -315,3 +315,14 @@ WORKDIR ${HOME}
 #
 ENV PATH=${INSTALL_ROOT}/bin:${PATH}
 ENV LD_LIBRARY_PATH=${INSTALL_ROOT}/lib:${LD_LIBRARY_PATH}
+
+# configure Intel MPI to use the shared memory transport for inter-process
+# communication.
+#
+# NOTE: this is required for newer versions of the Intel oneAPI stack (2022.1.0)
+#       to work within a container, otherwise the MPI run-time crashes before
+#       launching the application.  it does not appear to negatively impact
+#       older version of the stack (2021.4.0) though has not been thoroughly
+#       tested.
+#
+ENV I_MPI_FABRICS=shm
