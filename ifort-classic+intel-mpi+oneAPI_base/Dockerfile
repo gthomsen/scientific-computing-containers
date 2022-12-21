@@ -4,7 +4,7 @@ FROM docker.io/intel/oneapi-hpckit:2022.2-devel-ubuntu20.04
 # this Dockerfile builds an image on top of an 2022.2 Intel oneAPI HPCkit
 # image (which is derived from Ubuntu 20.04).
 #
-# dependencies built from source using v2022.1.0 of the Intel compilers:
+# dependencies built from source using v2021.6.0 of the Intel compilers:
 #
 #     Name               Version      Notes
 #     ----               -------      -----
@@ -21,6 +21,9 @@ FROM docker.io/intel/oneapi-hpckit:2022.2-devel-ubuntu20.04
 #     ----               -------
 #     gcc                9.4.0
 #     GDB                9.2
+#     Intel icc/ifort    2021.6.0
+#     Intel MKL          2022.1.0
+#     Intel MPI          2021.6.0
 #     OpenSSH (client)   8.2
 #     perf               N/A (tied to the host)
 #     Valgrind           3.15
