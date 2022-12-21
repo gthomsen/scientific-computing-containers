@@ -22,6 +22,7 @@ FROM ubuntu:jammy
 #     make               4.3
 #     OpenBLAS           0.3.20
 #     OpenSSH (client)   8.9
+#     GNU Parallel       20210822
 #     perf               N/A (tied to the host)
 #     Valgrind           3.18.1
 #     zlib               1.2.11
@@ -351,6 +352,15 @@ RUN \
     apt update && \
     apt install -y --no-install-recommends \
                 libopenblas-dev \
+               && \
+    rm -rf /var/lib/apt/lists/*
+
+# install GNU Parallel to provide a parallel execution of commands with
+# control over resource usage and output logging.
+RUN \
+    apt update && \
+    apt install -y --no-install-recommends \
+                parallel \
                && \
     rm -rf /var/lib/apt/lists/*
 
