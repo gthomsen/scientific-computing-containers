@@ -21,8 +21,9 @@ following packages are provided:
 
 # Base Images
 This image is a development image (with the "-dev" suffix) and was built against
-an unpublished 'ifort-intel-2021.4.0' image.  The 'ifort-intel-2021.4.0' image
-was built against `intel/oneapi-hpckit:2021.4-devel-ubuntu18.04`.
+an unpublished 'ifort2021.4-intelmpi2021.4-2022.06 image.  The
+'ifort2021.4-intelmpi2021.4-2022.06' image was built against
+`intel/oneapi-hpckit:2021.4-devel-ubuntu18.04`.
 
 # Deficiencies
 There are no known deficiencies in the provenance of this image.  It was built
