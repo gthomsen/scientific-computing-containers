@@ -10,7 +10,7 @@ following packages are provided:
 | HDF5 | 1.8.10 | Parallel I/O build, static library |
 | icc/ifort Classic | 2021.4.0 | |
 | Intel MKL | 2021.4.0 | |
-| Intel MPI | 2021.5.1 | |
+| Intel MPI | 2021.4.0 | |
 | make | 4.3 | |
 | netCDF4 - C | 4.8.1 | Parallel I/O build, static library |
 | netCDF4 - Fortran | 4.5.3 | Parallel I/O build, static library |
