@@ -1,11 +1,11 @@
 #!/bin/sh
 
 # simple wrapper for tagging and pushing the
-# gthomsen/scientific-base:gfortran-openmpi-2022.04 image to DockerHub.
+# gthomsen/scientific-base:gfortran10.3-openmpi4.1-2022.06 image to DockerHub.
 
 UPSTREAM_HUB="docker.io"
 UPSTREAM_REPO="gthomsen/scientific-base"
-IMAGE_NAME="gfortran-openmpi-2022.04"
+IMAGE_NAME="gfortran10.3-openmpi4.1-2022.06"
 
 echo "Logging into ${UPSTREAM_HUB}"
 
