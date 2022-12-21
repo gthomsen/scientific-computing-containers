@@ -1,5 +1,5 @@
 # Description
-This is an Intel MPI-based stack built with ifort 2022.2.0 on Ubuntu 20.04.  The
+This is an Intel MPI-based stack built with ifort 2021.6.0 on Ubuntu 20.04.  The
 following packages are provided:
 
 | Name | Version | Notes |
@@ -21,10 +21,10 @@ following packages are provided:
 
 # Base Images
 This image is a development image (with the "-dev" suffix) and was built against
-an unpublished 'ifort-intel-2022.2.0' image.  The 'ifort-intel-2022.2.0' image
-was built against `docker.io/intel/oneapi-hpckit:2022.2-devel-ubuntu20.04`.
+an unpublished 'ifort2021.6-intelmpi2021.6-2022.08' image.  The
+'ifort2021.6-intelmpi2021.6-2022.08' image was built against
+`docker.io/intel/oneapi-hpckit:2022.2-devel-ubuntu20.04`.
 
 # Deficiencies
 There are no known deficiencies in the provenance of this image.  It was built
 on 2022-08-04T01:54:54.394198615Z.
-
