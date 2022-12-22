@@ -112,3 +112,8 @@ RUN \
                        python3-pip \
                        && \
     rm -rf /var/lib/apt/lists/*
+
+# run from the user's home directory.  this doesn't really matter for run-times
+# that are isolated, but is a creature comfort for those that do
+# (e.g. Singularity).
+WORKDIR ${HOME}
