@@ -1,5 +1,6 @@
-# build against Ubuntu 22.04 LTS so we have a recent, stable foundation.
-FROM ubuntu:jammy
+# build against Ubuntu 18.04 LTS (patched up to 2022/11/30) so we have a
+# stable, legacy foundation.
+FROM ubuntu:bionic-20221130
 
 # this Dockerfile builds an image on top of an Ubuntu 22.04 base.
 #
@@ -17,14 +18,13 @@ FROM ubuntu:jammy
 #
 #     Name               Version
 #     ----               -------
-#     gcc/gfortran       11.2.0
-#     GDB                12.0.90
-#     make               4.3
-#     OpenBLAS           0.3.20
-#     OpenSSH (client)   8.9
-#     GNU Parallel       20210822
+#     gcc/gfortran       7.5.0
+#     GDB                8.1.1
+#     make               4.1
+#     OpenBLAS           0.2.20
+#     OpenSSH (client)   7.6p1
 #     perf               N/A (tied to the host)
-#     Valgrind           3.18.1
+#     Valgrind           3.13
 #     zlib               1.2.11
 
 # points of interest:
@@ -82,7 +82,7 @@ ARG NUMBER_JOBS=1
 
 # version of the base image's kernel.  we use this to link the kernel-specific
 # perf binary in place of the /usr/bin/perf placeholder.
-ARG BASE_IMAGE_KERNEL_VERSION=5.11.0-49-generic
+ARG BASE_IMAGE_KERNEL_VERSION=4.15.0-200-generic
 
 # specify the architecture of this container so architecture-specific
 # optimizations may be used.  by default we assume we're building an x86-64
