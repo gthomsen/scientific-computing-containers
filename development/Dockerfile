@@ -13,13 +13,18 @@ FROM ${BASE_IMAGE}
 # it is intended that the base image be one of the scientific base images,
 # though does not strictly require that.
 #
+# NOTE: we do not specify versions here since we do not know which image we're
+#       building on!
+#
 # packages installed via apt:
 #
 #     Name               Purpose
 #     ----               -------
+#     emacs-nox          Terminal-based Emacs
 #     mwm                Minimal window manager
 #     strace             Trace system calls in applications
 #     tightvncserver     VNC server
+#     vim                Terminal-based Vim
 #     xterm              Simple X11 terminal application
 #     xfonts-*           Font dependencies required for VNC server
 
