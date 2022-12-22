@@ -95,6 +95,12 @@ RUN \
     echo "${VNC_SERVER_PASSWORD}" | vncpasswd -f > ${HOME}/.vnc/passwd && \
     chmod 600 ${HOME}/.vnc/passwd
 
+# set the USER environment variable since TightVNC's server refuses to run
+# when it does not exist.  it doesn't actually matter what we set it to,
+# though we set it to the build user to be consistent with normal systems
+# so as to not confuse applications that actually respect its value.
+ENV USER=root
+
 # provide a minimal Python3 environment for scientific applications.  this is
 # enough to install upstream packages from PyPi for simple dependencies, though
 # is not intended to be used for larger applications as Conda is the preferred
