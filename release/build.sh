@@ -1,12 +1,18 @@
 #!/bin/sh
 
-# simple script for building the ifort2021.6-intelmpi2021.6-2022.12 image.
+# simple script for building the ifort2021.6-intelmpi2021.6-2022.12-dev image.
+# this assumes that the ifort2021.6-intelmpi2021.6-2022.12 base image has
+# already been built.
+
+# base image to extend.
+BASE_IMAGE_NAME=ifort2021.6-intelmpi2021.6-2022.12
 
 # parallelize the build as much as possible.
 NUMBER_CORES=`grep MHz /proc/cpuinfo  | wc -l`
 
-# build the ifort2021.6-intelmpi2021.6-2022.12 base image.
+# build the ifort2021.6-intelmpi2021.6-2022.12-dev image.
 podman build \
     --build-arg NUMBER_JOBS=${NUMBER_CORES} \
-    -t ifort2021.6-intelmpi2021.6-2022.12 \
-    ../ifort-classic+intel-mpi+oneAPI_base
+    --build-arg BASE_IMAGE=${BASE_IMAGE_NAME} \
+    -t ${BASE_IMAGE_NAME}-dev \
+    ../development

@@ -1,12 +1,12 @@
 #!/bin/sh
 
 # simple wrapper for tagging and pushing the
-# gthomsen/scientific-base:ifort2021.6-intelmpi2021.6-2022.12 image to
+# gthomsen/scientific-base:ifort2021.6-intelmpi2021.6-2022.12-dev image to
 # DockerHub.
 
 UPSTREAM_HUB="docker.io"
 UPSTREAM_REPO="gthomsen/scientific-base"
-IMAGE_NAME="ifort2021.6-intelmpi2021.6-2022.12"
+IMAGE_NAME="ifort2021.6-intelmpi2021.6-2022.12-dev"
 
 echo "Logging into ${UPSTREAM_HUB}"
 
