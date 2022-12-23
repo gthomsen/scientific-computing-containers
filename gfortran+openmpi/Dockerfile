@@ -76,6 +76,17 @@ ARG NUMBER_JOBS=1
 # perf binary in place of the /usr/bin/perf placeholder.
 ARG BASE_IMAGE_KERNEL_VERSION=5.11.0-49-generic
 
+# specify the architecture of this container so architecture-specific
+# optimizations may be used.  by default we assume we're building an x86-64
+# container, though this may be overridden at build time.  may be one of the
+# following:
+#
+#   x86-64       64-bit Intel architectures
+#   aarch64      64-bit ARMv8A architectures
+#
+# unknown architectures will be ignored.
+ARG BUILD_ARCH=x86-64
+
 # create the build and installation roots.
 RUN \
     mkdir -p ${BUILD_ROOT} && \
@@ -294,18 +305,27 @@ RUN \
     # configure FFTW.
     #
     # enable parallel processing with both MPI and threads.  exploit modern
-    # Intel ISAs by using fused multiply-adds and AVX-2.
+    # architectures by using fused multiply-adds and SIMD.
     #
-    # NOTE: specifying AVX-2 makes this x86-64 specific!
+    # NOTE: we default to the CNTVCT_EL0 counter on ARMv8 systems as it appears
+    #       to be widely available and does not require privileges to access.
+    #       while this may not be the best performance counter it is better than
+    #       no counter which causes FFTW to always return FFTW_ESTIMATE-based
+    #       plans.
     #
+    if [ "${BUILD_ARCH}" = "x86-64" ]; then \
+        SIMD_FLAGS="--enable-avx2" ; \
+    elif [ "${BUILD_ARCH}" = "aarch64" ]; then \
+        SIMD_FLAGS="--enable-neon --enable-armv8-cntvct-el0" ; \
+    fi && \
     cd fftw-3.3.9 && \
     ./configure \
         --prefix=${INSTALL_ROOT} \
         --enable-mpi \
         --enable-openmp \
         --enable-threads \
-        --enable-avx2 \
         --enable-fma \
+        ${SIMD_FLAGS} \
         CC=${CC} \
         F77=${FC} \
         MPICC=${MPICC} && \
