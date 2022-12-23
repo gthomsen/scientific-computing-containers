@@ -72,6 +72,14 @@ ARG INSTALL_ROOT=/opt
 # staging and build location.
 ARG BUILD_ROOT=/tmp/build
 
+# specify the directory where a spawned shell should start.  we default
+# to the build user's home directory.
+#
+# NOTE: we must do this as HOME is a shell-specific environment variable
+#       that is not defined as part of the Dockerfile specification.
+#
+ARG HOME=/root
+
 # full paths to the compilers used.
 ARG CC=${I_COMPILER_ROOT}/linux/bin/intel64/icc
 ARG FC=${I_COMPILER_ROOT}/linux/bin/intel64/ifort
