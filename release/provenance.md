@@ -14,6 +14,7 @@ following packages are provided:
 | OpenBLAS | 0.2.20 | |
 | OpenMPI | 4.1.2 | C and Fortran support, no C++ |
 | OpenSSH (client) | 7.6p1 | |
+| GNU Parallel | 20210822 | |
 | perf | N/A | No version since it is tied to the host |
 | Valgrind | 3.13 | |
 | zlib | 1.2.11 | |

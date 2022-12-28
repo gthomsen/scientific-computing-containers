@@ -13,6 +13,7 @@ FROM ubuntu:bionic-20221130
 #     netCDF4 - C        4.8.1        Parallel I/O build, static library
 #     netCDF4 - Fortran  4.5.3        Parallel I/O build, static library
 #     FFTW               3.3.9        C and Fortran support, no C++
+#     GNU Parallel       20210822     Version selected to match Ubuntu 22.04
 #
 # packages installed via apt:
 #
@@ -385,12 +386,42 @@ RUN \
 
 # install GNU Parallel to provide a parallel execution of commands with
 # control over resource usage and output logging.
+#
+# NOTE: we install version 20210822 to match Ubuntu 22.04 LTS.
+#
 RUN \
-    apt update && \
-    apt install -y --no-install-recommends \
-                parallel \
-               && \
-    rm -rf /var/lib/apt/lists/*
+    # download and unpack.
+    curl -O https://ftp.gnu.org/gnu/parallel/parallel-20210822.tar.bz2 && \
+    tar jxf parallel-20210822.tar.bz2 && \
+
+    # use the default configuration.
+    cd parallel-20210822 && \
+    ./configure \
+        --prefix=${INSTALL_ROOT} && \
+
+    # build and install.
+    make -j${NUMBER_JOBS} && \
+    make install && \
+
+    # cleanup after ourselves.
+    cd ${BUILD_ROOT} && \
+    rm -rf parallel-20210822* && \
+
+    # suppress Parallel's citation nag screen since we accept the request to
+    # cite on behalf of our users.
+    #
+    # NOTE: this should be as simple as:
+    #
+    #           sh -c "echo 'will cite' | ${INSTALL_ROOT}/bin/parallel --citation"
+    #
+    #       but that apparently fails to appease Parallel's nag screen when
+    #       done from within the container build (at least with Podman...).
+    #
+    #       instead, we simply create the file that is generated when the above
+    #       command actually works.
+    #
+    mkdir ${HOME}/.parallel && \
+    touch ${HOME}/.parallel/will-cite
 
 # run from the user's home directory.  this doesn't really matter for run-times
 # that are isolated, but is a creature comfort for those that do
